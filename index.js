@@ -7,8 +7,6 @@ import chalkAnimation from "chalk-animation";
 import figlet from "figlet";
 import { createSpinner } from "nanospinner";
 
-console.log(chalk.bgGreen("hello JS"));
-
 let playerName;
 
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
@@ -20,10 +18,23 @@ async function welcome() {
 
   console.log(`${chalk.bgBlue("How To Play")}
   I am a process on your computer.
-  If you get any question wrong I will be ${chalk.bgRed("killed")}
+  If you get any questions wrong I will be ${chalk.bgRed("killed")}
   So get all the question right...
   
   `);
 }
 
-a;
+async function askName() {
+  const answer = await inquirer.prompt({
+    name: "player_name",
+    type: "input",
+    message: "What is your name?",
+    default() {
+      return "Player";
+    },
+  });
+  playerName = answer.player_name;
+}
+
+await welcome();
+await askName();
