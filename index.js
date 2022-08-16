@@ -36,5 +36,32 @@ async function askName() {
   playerName = answer.player_name;
 }
 
-await welcome();
-await askName();
+async function question1() {
+  const answer = await inquirer.prompt({
+    name: "question_1",
+    type: "list",
+    message: "Which of the following is not a JavaScript Data Types?\n",
+    choices: ["Boolean", "Undefined", "Number", "Float"],
+  });
+  return handleAnswer(answer.question_1 == "Float");
+}
+
+async function handleAnswer(isCorrect) {
+  const spinner = createSpinner("Checking...").start();
+  await sleep();
+
+  if (isCorrect) {
+    spinner.success({
+      text: `Nice work ${playerName}. That's the correct answer.`,
+    });
+  } else {
+    spinner.error({
+      text: `Game over, you loss ${playerName}!`,
+    });
+    process.exit(1);
+  }
+}
+
+// await welcome();
+// await askName();
+await question1();
