@@ -62,6 +62,16 @@ async function handleAnswer(isCorrect) {
   }
 }
 
-// await welcome();
-// await askName();
+function winner() {
+  console.clear();
+  const msg = `Congrats, ${playerName} !\n You Are JS BOSS`;
+
+  figlet(msg, (err, data) => {
+    console.log(gradient.pastel.multiline(data));
+  });
+}
+
+await welcome();
+await askName();
 await question1();
+await winner();
